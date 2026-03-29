@@ -34,10 +34,14 @@ const FoodCard = ({ product, onEdit, onDelete }: FoodCardProps) => {
                     component="img"
                     height="250"
                     image={
-                        product.imageUrl ||
-                        'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80'
+                        product.imageUrl && product.imageUrl.startsWith("http")
+                            ? product.imageUrl
+                            : 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80'
                     }
                     alt={product.name}
+                    onError={(e: any) => {
+                        e.target.src = 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80';
+                    }}
                     sx={{
                         objectFit: 'cover',
                         transition: 'transform 0.3s',
